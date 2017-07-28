@@ -1,0 +1,8 @@
+--- 
+- hosts: all
+  become: yes
+  tasks:
+  - name: installing jenkins
+    yum:
+     name: https://github.com/solita/ansible-role-solita.jenkins.git
+     state: present

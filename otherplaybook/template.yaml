@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  #vars:
+   #app_path: RanjithKumarKatta
+  
+  
+  
+  tasks:
+  - name: dynamic facts
+    template:
+     src: info.j2
+     dest: ~/tem_folder/test

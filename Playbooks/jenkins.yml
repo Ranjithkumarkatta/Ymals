@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: installing java
+    yum:
+     name: java
+     state: present
+  - name: installing jenkins
+    yum:
+     name: -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+     state: present
+  - name: installing rpm
+    yum:
+     name: rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+     state: present
+  - name: service start
+    service: 
+     name: jenkins
+     state: started
+     enabled: yes

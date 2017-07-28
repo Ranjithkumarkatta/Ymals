@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: install apache on RedHat Server
+    yum: 
+      name: httpd
+      state: present
+    when: ansible_os_family == "RedHat"
+
+    notify:
+    - restart httpd
+  handlers:
+  - name: restart apache
+    service:
+      name: httpd
+      state: restarted     
+
+  - name: install apache on Ubuntu server
+    apt:
+      name: apache2
+      state: present
+    when: ansible_os_family == "Debian"
+
+    notify:
+    - restart apache
+  handlers:
+  - name: restart apache
+    service:
+      name: apache2
+      state: restarted 

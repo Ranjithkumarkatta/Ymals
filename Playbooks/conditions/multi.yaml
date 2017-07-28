@@ -1,0 +1,26 @@
+--- 
+- hosts: all
+  vars: 
+   app: git
+   app: tree
+   app: wget
+  become: yes
+  tasks:
+  - name: installed " {{vars.app}} "
+    yum:
+     name: " {{vars.app} "
+     state: present
+    with_items:
+    - git
+    - tree
+    - wget 
+    when: ansible_os_family == "Redhat" 
+  - name: installed " {{vars.app} "
+    apt:
+     name: " {{vars.app} "
+     state: present
+    with_vars.app:
+    - git
+    - tree
+    - wget 
+    when: ansible_os_family == "Debian"
